@@ -43,7 +43,7 @@ export default function Services() {
               <Sparkles className="h-3.5 w-3.5" /> What We Offer
             </div>
             <h2 className="font-display text-3xl font-light leading-tight sm:text-4xl md:text-5xl text-[#18141a] dark:text-white">
-              Crafted for Your <span className="italic text-shimmer-dark">Moments</span>
+              Every service your event needs, <span className="italic text-shimmer-dark">under one roof.</span>
             </h2>
           </div>
 
