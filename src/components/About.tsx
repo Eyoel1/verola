@@ -12,7 +12,7 @@ const values = [
 
 const pillars = [
   { num: '2026', label: 'Founded' },
-  { num: '3+',   label: 'Visionaries' },
+  { num: '3',    label: 'Visionaries' },
   { num: '100%', label: 'Dedicated' },
 ];
 

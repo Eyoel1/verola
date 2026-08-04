@@ -5,7 +5,7 @@ import { useReveal } from '../hooks/useReveal';
 
 const stats = [
   { from: 1990, num: 2026, suffix: '', label: 'Year Established', sub: 'Founded with vision' },
-  { from: 0,    num: 3,    suffix: '+', label: 'Visionary Partners', sub: 'Leading with passion' },
+  { from: 0,    num: 3,    suffix: '',  label: 'Visionary Partners', sub: 'Leading with passion' },
   { from: 0,    num: 10,   suffix: '+', label: 'Services Offered', sub: 'Full-service production' },
   { from: 0,    num: 100,  suffix: '%', label: 'Dedication', sub: 'To every detail' },
 ];
