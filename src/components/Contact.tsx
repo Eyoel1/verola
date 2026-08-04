@@ -5,10 +5,10 @@ import { Phone, Mail, MessageCircle, MapPin, Send, CheckCircle2 } from 'lucide-r
 import { useReveal } from '../hooks/useReveal';
 
 const contactInfo = [
-  { icon: Phone, label: 'Phone', value: '+251 956 535 210', href: 'tel:+251956535210', color: '#f7a8c4' },
-  { icon: MessageCircle, label: 'WhatsApp', value: '+251 911 715 064', href: 'https://wa.me/251911715064', color: '#ffd97d' },
-  { icon: Mail, label: 'Email', value: 'Samrawit.endale@Velora.com', href: 'mailto:Samrawit.endale@Velora.com', color: '#fbc8da' },
-  { icon: MapPin, label: 'Office', value: '22 next to Zerihun building, IPS building 2nd floor, Addis Ababa', href: 'https://maps.app.goo.gl/qTf5YvNYG334Jjge9', color: '#ffe8a3' },
+  { icon: Phone, label: 'Phone', value: '+251 956 535 210', href: 'tel:+251956535210', color: '#e8739b' },
+  { icon: MessageCircle, label: 'WhatsApp', value: '+251 911 715 064', href: 'https://wa.me/251911715064', color: '#e8739b' },
+  { icon: Mail, label: 'Email', value: 'Samrawit.endale@Velora.com', href: 'mailto:Samrawit.endale@Velora.com', color: '#e8739b' },
+  { icon: MapPin, label: 'Office', value: '22 next to Zerihun building, IPS building 2nd floor, Addis Ababa', href: 'https://maps.app.goo.gl/qTf5YvNYG334Jjge9', color: '#e8739b' },
 ];
 
 const eventTypes = ['Wedding Planning', 'Corporate Events', 'Conference Planning', 'Decoration', 'Catering', 'Venue Setup', 'Sound & Lighting', 'Entertainment'];
@@ -33,11 +33,12 @@ export default function Contact() {
 
         {/* Heading */}
         <div ref={headingRef} className={`text-center mb-16 reveal ${headingVisible ? 'visible' : ''}`}>
-          <span className="text-[#e8739b] text-xs tracking-[0.4em] uppercase font-medium">Get in Touch</span>
-          <h2 className="font-display text-4xl md:text-5xl mt-4 font-light">
+          <span className="text-[#e8739b] text-xs tracking-[0.4em] uppercase font-bold">Get in Touch</span>
+          <h2 className="font-display text-3xl md:text-5xl mt-4 font-light text-[#18141a] dark:text-white">
             Let's Plan Your <em className="text-shimmer-dark not-italic">Event</em>
           </h2>
-          <p className="text-[#5a4a58] dark:text-white/70 mt-5 max-w-2xl mx-auto font-light text-[15px]">
+          {/* Bold, crisp dark text */}
+          <p className="text-[#18141a] dark:text-white/90 mt-5 max-w-2xl mx-auto font-normal text-sm sm:text-base leading-relaxed">
             Ready to create something extraordinary? Reach out and let's start building the infrastructure
             for your success.
           </p>
@@ -58,7 +59,7 @@ export default function Contact() {
                   href={info.href}
                   target={info.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-5 bg-white dark:bg-[#251d28] border border-[#f7a8c4]/20 dark:border-white/10 rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden"
+                  className="group flex items-start gap-5 bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 dark:border-white/10 rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden"
                 >
                   {/* Hover gradient sweep */}
                   <div
@@ -67,16 +68,13 @@ export default function Contact() {
                   />
 
                   <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all duration-400 group-hover:scale-110 shadow-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${info.color}, #ffd97d)`,
-                    }}
+                    className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-all duration-400 group-hover:scale-110 shadow-lg bg-[#e8739b] text-white"
                   >
-                    <Icon className="text-white" size={20} />
+                    <Icon size={20} />
                   </div>
-                  <div className="relative">
-                    <div className="text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: info.color }}>{info.label}</div>
-                    <div className="text-[#18141a] dark:text-white mt-1 text-[15px] group-hover:text-[#e8739b] transition-colors">{info.value}</div>
+                  <div className="relative min-w-0">
+                    <div className="text-[10px] tracking-[0.3em] uppercase font-bold text-[#e8739b]">{info.label}</div>
+                    <div className="text-[#18141a] dark:text-white font-semibold mt-1 text-sm sm:text-base break-words group-hover:text-[#e8739b] transition-colors">{info.value}</div>
                   </div>
                 </a>
               );
@@ -87,7 +85,7 @@ export default function Contact() {
               href="https://maps.app.goo.gl/qTf5YvNYG334Jjge9"
               target="_blank"
               rel="noopener noreferrer"
-              className="block rounded-2xl overflow-hidden shadow-md mt-4 group relative h-48 border border-[#f7a8c4]/20 dark:border-white/10"
+              className="block rounded-2xl overflow-hidden shadow-md mt-4 group relative h-48 border border-[#f7a8c4]/30 dark:border-white/10"
               style={{ background: 'linear-gradient(135deg, #18141a, #2d2030)' }}
             >
               {/* Animated grid pattern */}
@@ -106,8 +104,8 @@ export default function Contact() {
                 </div>
               </div>
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
-                <p className="text-white/80 text-sm mt-8">22 next to Zerihun building, IPS building 2nd floor</p>
-                <p className="text-shimmer text-xs mt-2 tracking-wide uppercase font-medium">View on Google Maps →</p>
+                <p className="text-white font-medium text-sm sm:text-base mt-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">22 next to Zerihun building, IPS building 2nd floor</p>
+                <p className="text-[#ffd97d] text-xs mt-2 tracking-wide uppercase font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">View on Google Maps →</p>
               </div>
             </a>
           </div>
@@ -116,7 +114,7 @@ export default function Contact() {
           <div ref={formRef} className={`reveal-right ${formVisible ? 'visible' : ''}`}>
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-[#251d28] border border-[#f7a8c4]/20 dark:border-white/10 rounded-2xl shadow-2xl p-8 space-y-5 relative overflow-hidden"
+              className="bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 dark:border-white/10 rounded-2xl shadow-2xl p-8 space-y-5 relative overflow-hidden"
             >
               {/* Animated top bar */}
               <div className="absolute top-0 left-0 right-0 h-1 gradient-line" />
@@ -131,22 +129,22 @@ export default function Contact() {
               <div className="grid sm:grid-cols-2 gap-5 relative">
                 <Field label="Phone" name="phone" type="tel" placeholder="+251 ..." />
                 <div>
-                  <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] dark:text-white/70 block mb-2">Event Type</label>
+                  <label className="text-xs tracking-[0.15em] uppercase text-[#18141a] dark:text-white/90 font-bold block mb-2">Event Type</label>
                   <select
-                    className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/25 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all"
+                    className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all"
                   >
                     {eventTypes.map((t) => (
-                      <option key={t} value={t} className="bg-white dark:bg-[#18141a] text-[#18141a] dark:text-white">{t}</option>
+                      <option key={t} value={t} className="bg-white dark:bg-[#18141a] text-[#18141a] dark:text-white font-medium">{t}</option>
                     ))}
                   </select>
                 </div>
               </div>
               <div className="relative">
-                <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] dark:text-white/70 block mb-2">Tell us about your event</label>
+                <label className="text-xs tracking-[0.15em] uppercase text-[#18141a] dark:text-white/90 font-bold block mb-2">Tell us about your event</label>
                 <textarea
                   rows={4}
                   placeholder="Date, location, number of guests, and any details you'd like to share..."
-                  className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/25 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all resize-none placeholder:text-[#5a4a58]/40 dark:placeholder:text-white/40"
+                  className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all resize-none placeholder:text-[#2d2030]/60 dark:placeholder:text-white/50"
                 />
               </div>
 
@@ -180,13 +178,13 @@ export default function Contact() {
 function Field({ label, name, type, placeholder }: { label: string; name: string; type: string; placeholder: string }) {
   return (
     <div>
-      <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] dark:text-white/70 block mb-2">{label}</label>
+      <label className="text-xs tracking-[0.15em] uppercase text-[#18141a] dark:text-white/90 font-bold block mb-2">{label}</label>
       <input
         type={type}
         name={name}
         placeholder={placeholder}
         required
-        className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/25 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all placeholder:text-[#5a4a58]/40 dark:placeholder:text-white/40"
+        className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all placeholder:text-[#2d2030]/60 dark:placeholder:text-white/50"
       />
     </div>
   );

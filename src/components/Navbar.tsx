@@ -50,7 +50,7 @@ export default function Navbar() {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled
-        ? 'bg-white/90 dark:bg-[#18141a]/90 backdrop-blur-xl shadow-[0_4px_32px_rgba(247,168,196,0.15)] py-3'
+        ? 'bg-white/95 dark:bg-[#18141a]/95 backdrop-blur-xl shadow-[0_4px_32px_rgba(247,168,196,0.15)] py-3'
         : 'bg-transparent py-5'
     }`}>
       {scrolled && <div className="absolute bottom-0 left-0 right-0 h-[1.5px] gradient-line" />}
@@ -66,7 +66,7 @@ export default function Navbar() {
             <div className={`font-display text-xl leading-none transition-colors ${scrolled ? 'text-[#18141a] dark:text-white' : 'text-white'}`}>
               Velora<span className="text-shimmer-dark">.</span>
             </div>
-            <div className={`text-[8px] tracking-[0.35em] uppercase mt-0.5 ${scrolled ? 'text-[#e8739b]' : 'text-[#fbc8da]'}`}>
+            <div className={`text-[8px] tracking-[0.35em] uppercase font-bold mt-0.5 ${scrolled ? 'text-[#e8739b]' : 'text-[#fbc8da]'}`}>
               Events &amp; Communications
             </div>
           </div>
@@ -79,12 +79,12 @@ export default function Navbar() {
               key={link.href}
               onClick={() => handleNav(link.href)}
               data-cursor-hover
-              className={`nav-link text-sm tracking-wide transition-colors duration-300 ${
+              className={`nav-link text-sm font-semibold tracking-wide transition-colors duration-300 ${
                 activeSection === link.href.slice(1)
                   ? 'text-[#e8739b]'
                   : scrolled
-                  ? 'text-[#5a4a58] dark:text-white/70 hover:text-[#e8739b]'
-                  : 'text-white/80 hover:text-white'
+                  ? 'text-[#18141a] dark:text-white/90 hover:text-[#e8739b]'
+                  : 'text-white hover:text-[#f7a8c4]'
               }`}
             >
               {link.label}
@@ -108,7 +108,7 @@ export default function Navbar() {
           <button
             onClick={() => handleNav('#contact')}
             data-cursor-hover
-            className="btn-brand text-[#18141a] text-sm px-7 py-2.5 rounded-full font-semibold tracking-wide relative overflow-hidden"
+            className="btn-brand text-[#18141a] text-sm px-7 py-2.5 rounded-full font-bold tracking-wide relative overflow-hidden"
           >
             <span className="relative z-10">Get in Touch</span>
           </button>
@@ -135,19 +135,19 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-500 ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="bg-white/95 dark:bg-[#18141a]/95 backdrop-blur-xl px-6 py-6 flex flex-col gap-4 shadow-xl border-t border-pink-100 dark:border-white/10">
+        <div className="bg-white/98 dark:bg-[#18141a]/98 backdrop-blur-xl px-6 py-6 flex flex-col gap-4 shadow-xl border-t border-pink-100 dark:border-white/10">
           {links.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNav(link.href)}
-              className="text-left text-[#5a4a58] dark:text-white/70 hover:text-[#e8739b] transition-colors text-sm tracking-wide py-1"
+              className="text-left text-[#18141a] dark:text-white/90 font-semibold hover:text-[#e8739b] transition-colors text-sm tracking-wide py-1"
             >
               {link.label}
             </button>
           ))}
           <button
             onClick={() => handleNav('#contact')}
-            className="btn-brand text-[#18141a] text-sm px-6 py-3 rounded-full font-semibold tracking-wide mt-2"
+            className="btn-brand text-[#18141a] text-sm px-6 py-3 rounded-full font-bold tracking-wide mt-2"
           >
             Get in Touch
           </button>
