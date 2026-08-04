@@ -1,199 +1,68 @@
-import { Heart, Briefcase, Palette, Utensils, Building2, Volume2, Music, Users } from 'lucide-react';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, Briefcase, Building2, ChevronLeft, ChevronRight, Heart, Music, Palette, Sparkles, Utensils, Users, Volume2 } from 'lucide-react';
 import { useReveal } from '../hooks/useReveal';
 
 const services = [
-  {
-    icon: Heart,
-    title: 'Wedding Planning',
-    desc: 'From intimate ceremonies to grand celebrations, we craft weddings that reflect your unique love story.',
-    img: 'https://images.pexels.com/photos/37827340/pexels-photo-37827340.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#f7a8c4',
-  },
-  {
-    icon: Briefcase,
-    title: 'Corporate Events',
-    desc: 'High-impact corporate experiences — conferences, launches, and galas that elevate your brand.',
-    img: 'https://images.pexels.com/photos/8761524/pexels-photo-8761524.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#ffd97d',
-  },
-  {
-    icon: Palette,
-    title: 'Decoration',
-    desc: 'Impeccable styling and floral artistry that transforms any venue into a breathtaking setting.',
-    img: 'https://images.pexels.com/photos/16120136/pexels-photo-16120136.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#f7a8c4',
-  },
-  {
-    icon: Utensils,
-    title: 'Catering',
-    desc: 'Exquisite cuisine blending Ethiopian flavors with international gastronomy for memorable dining.',
-    img: 'https://images.pexels.com/photos/12309036/pexels-photo-12309036.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#ffd97d',
-  },
-  {
-    icon: Building2,
-    title: 'Venue Setup',
-    desc: 'Complete venue transformation — seating, staging, lighting, and ambiance, every detail perfected.',
-    img: 'https://images.pexels.com/photos/29040997/pexels-photo-29040997.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#f7a8c4',
-  },
-  {
-    icon: Volume2,
-    title: 'Sound & Lighting',
-    desc: 'State-of-the-art audio-visual production — crystal-clear sound and dramatic lighting design.',
-    img: 'https://images.pexels.com/photos/13230484/pexels-photo-13230484.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#ffd97d',
-  },
-  {
-    icon: Music,
-    title: 'Entertainment',
-    desc: 'Live performances, DJs, cultural shows, and curated entertainment that captivates every guest.',
-    img: 'https://images.pexels.com/photos/8186275/pexels-photo-8186275.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#f7a8c4',
-  },
-  {
-    icon: Users,
-    title: 'Conference Planning',
-    desc: 'End-to-end conference management — agenda, speakers, registration, and hospitality.',
-    img: 'https://images.pexels.com/photos/8761547/pexels-photo-8761547.jpeg?auto=compress&cs=tinysrgb&h=1200&w=800',
-    accent: '#ffd97d',
-  },
+  { icon: Heart, title: 'Wedding Planning', desc: 'From intimate ceremonies to grand celebrations, we craft weddings that tell your unique love story.', img: 'https://images.pexels.com/photos/37827340/pexels-photo-37827340.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Love & Celebration' },
+  { icon: Briefcase, title: 'Corporate Events', desc: 'High-impact conferences, launches, and galas that elevate your brand and impress every stakeholder.', img: 'https://images.pexels.com/photos/8761524/pexels-photo-8761524.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Business Excellence' },
+  { icon: Palette, title: 'Decoration', desc: 'Impeccable styling and floral artistry that transforms any venue into a breathtaking setting.', img: 'https://images.pexels.com/photos/16120136/pexels-photo-16120136.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Spatial Artistry' },
+  { icon: Utensils, title: 'Catering', desc: 'Exquisite cuisine blending Ethiopian flavors with international gastronomy for memorable dining.', img: 'https://images.pexels.com/photos/12309036/pexels-photo-12309036.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Culinary Excellence' },
+  { icon: Building2, title: 'Venue Setup', desc: 'Complete venue transformation, from seating and staging to lighting and ambiance.', img: 'https://images.pexels.com/photos/29040997/pexels-photo-29040997.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Full Transformation' },
+  { icon: Volume2, title: 'Sound & Lighting', desc: 'State-of-the-art audio-visual production with crystal-clear sound and dramatic lighting.', img: 'https://images.pexels.com/photos/13230484/pexels-photo-13230484.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'AV Production' },
+  { icon: Music, title: 'Entertainment', desc: 'Live performances, DJs, and cultural shows curated to captivate every guest.', img: 'https://images.pexels.com/photos/8186275/pexels-photo-8186275.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Live Experiences' },
+  { icon: Users, title: 'Conference Planning', desc: 'Agenda, speakers, registration, and hospitality managed seamlessly end to end.', img: 'https://images.pexels.com/photos/8761547/pexels-photo-8761547.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400', tag: 'Event Management' },
 ];
+
+const AUTO_SLIDE_INTERVAL = 4000;
 
 export default function Services() {
   const [headingRef, headingVisible] = useReveal<HTMLDivElement>();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const goTo = (index: number) => setActiveIndex((index + services.length) % services.length);
+
+  useEffect(() => {
+    if (!paused) timer.current = setInterval(() => goTo(activeIndex + 1), AUTO_SLIDE_INTERVAL);
+    return () => { if (timer.current) clearInterval(timer.current); };
+  }, [activeIndex, paused]);
 
   return (
-    <section id="services" className="relative py-28 overflow-hidden"
-      style={{ background: 'linear-gradient(175deg, #fdf9f5 0%, #fff6f9 50%, #fdf9f5 100%)' }}>
-
-      {/* Decorative blobs */}
-      <div className="absolute top-[-200px] right-[-200px] w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #f7a8c425 0%, transparent 70%)' }} />
-      <div className="absolute bottom-[-200px] left-[-200px] w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #ffd97d20 0%, transparent 70%)' }} />
-
-      <div className="relative max-w-7xl mx-auto px-6">
-
-        {/* Heading */}
-        <div ref={headingRef} className={`text-center mb-16 reveal ${headingVisible ? 'visible' : ''}`}>
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#f7a8c4]" />
-            <span className="text-[#e8739b] text-[10px] tracking-[0.5em] uppercase font-medium">What We Offer</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#f7a8c4]" />
+    <section id="services" className="relative overflow-hidden bg-[#fdf9f5] py-24 text-[#18141a] transition-colors duration-500 dark:bg-[#18141a] dark:text-white">
+      <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-[#f7a8c4]/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-32 bottom-4 h-96 w-96 rounded-full bg-[#ffd97d]/15 blur-3xl" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div ref={headingRef} className={`mb-12 flex flex-col justify-between gap-7 md:mb-14 md:flex-row md:items-end ${headingVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'} transition-all duration-1000`}>
+          <div className="max-w-3xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#f7a8c4]/40 bg-[#fde8f1] px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#e8739b] dark:bg-white/10"><Sparkles className="h-3.5 w-3.5" /> What We Offer</div>
+            <h2 className="font-display text-4xl font-light leading-tight sm:text-5xl md:text-6xl">Our signature <span className="italic text-shimmer-dark">services.</span></h2>
+            <p className="mt-4 max-w-xl text-sm font-light leading-relaxed text-[#5a4a58] dark:text-white/70">Choose a service to explore it, or let the collection play. Every detail is managed by one thoughtful team.</p>
           </div>
-          <h2 className="font-display text-4xl md:text-6xl text-[#18141a] font-light leading-[1.05]">
-            Our Signature{' '}
-            <em className="not-italic" style={{
-              background: 'linear-gradient(100deg, #e8739b, #f7a8c4, #ffd97d)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>Services</em>
-          </h2>
-          <p className="text-[#5a4a58] mt-5 max-w-xl mx-auto font-light text-[15px] leading-relaxed">
-            Hover over each service to explore — from concept to execution, every detail crafted to perfection.
-          </p>
+          <div className="flex items-center gap-4 self-start md:self-auto"><span className="text-xs font-semibold tracking-widest text-[#9b7b8e] dark:text-white/60">{String(activeIndex + 1).padStart(2, '0')} <span className="mx-1 text-[#d7bdca]">/</span> {String(services.length).padStart(2, '0')}</span><button onClick={() => { setPaused(true); goTo(activeIndex - 1); }} className="grid h-11 w-11 place-items-center rounded-full border border-[#f7a8c4]/40 bg-white transition hover:bg-[#fde8f1] dark:bg-white/10"><ChevronLeft className="h-4 w-4" /></button><button onClick={() => { setPaused(true); goTo(activeIndex + 1); }} className="grid h-11 w-11 place-items-center rounded-full bg-[#e8739b] text-white transition hover:bg-[#d95e8b]"><ChevronRight className="h-4 w-4" /></button></div>
         </div>
 
-        {/* Expanding panels */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 h-[480px] md:h-[560px]">
-          {services.map((s, i) => (
-            <ServicePanel key={s.title} service={s} index={i} />
-          ))}
+        <div className="relative py-4" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+          <div className="flex min-h-[470px] items-stretch justify-center gap-4 sm:gap-6">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              const selected = index === activeIndex;
+              const previous = index === (activeIndex - 1 + services.length) % services.length;
+              const next = index === (activeIndex + 1) % services.length;
+              const visible = selected || previous || next;
+              return <article key={service.title} onClick={() => { setPaused(true); setActiveIndex(index); }} className={`relative shrink-0 cursor-pointer overflow-hidden rounded-[2rem] border transition-all duration-700 ${selected ? 'w-[min(82vw,540px)] border-[#f7a8c4]/60 bg-[#251d28] shadow-2xl shadow-pink-500/20' : visible ? 'hidden w-[230px] border-[#5a4a58]/45 bg-[#251d28] opacity-100 hover:border-[#f7a8c4]/70 md:block' : 'hidden'}`}>
+                <img src={service.img} alt={service.title} className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ${selected ? 'scale-105' : 'scale-100'}`} />
+                <div className={`absolute inset-0 transition-all duration-500 ${selected ? 'bg-gradient-to-t from-[#18141a] via-[#18141a]/35 to-transparent' : 'bg-gradient-to-t from-[#18141a]/85 via-[#18141a]/30 to-[#18141a]/10'}`} />
+                <div className="absolute left-5 right-5 top-5 flex items-start justify-between"><span className={`rounded-full px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest ${selected ? 'bg-white/90 text-[#e8739b]' : 'bg-black/25 text-white/85 backdrop-blur'}`}>{service.tag}</span><span className="font-display text-3xl text-white/75">{String(index + 1).padStart(2, '0')}</span></div>
+                <div className="absolute inset-x-5 bottom-6 sm:inset-x-7 sm:bottom-8"><div className={`mb-4 grid h-11 w-11 place-items-center rounded-full transition-all ${selected ? 'bg-[#f7a8c4] text-[#18141a]' : 'bg-white/15 text-white backdrop-blur'}`}><Icon className="h-4 w-4" /></div><h3 className={`font-display leading-none text-white transition-all ${selected ? 'text-3xl sm:text-4xl' : 'text-2xl'}`}>{service.title}</h3><div className={`overflow-hidden transition-all duration-500 ${selected ? 'mt-3 max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}><p className="text-sm font-light leading-relaxed text-white/80">{service.desc}</p><button onClick={(event) => { event.stopPropagation(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="mt-5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-[#f7a8c4] hover:text-white">Enquire now <ArrowRight className="h-4 w-4" /></button></div></div>
+              </article>;
+            })}
+          </div>
         </div>
-
-        {/* CTA */}
-        <div className="text-center mt-14">
-          <button
-            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            data-cursor-hover
-            className="btn-brand text-[#18141a] px-10 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-semibold shadow-lg"
-          >
-            Plan Your Event
-          </button>
-        </div>
+        <div className="mt-7 flex justify-center gap-2">{services.map((service, index) => <button key={service.title} onClick={() => { setPaused(true); setActiveIndex(index); }} aria-label={`Show ${service.title}`} className={`h-2 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-[#e8739b]' : 'w-2 bg-[#f7a8c4]/50 hover:bg-[#f7a8c4]'}`} />)}</div>
+        <div className="mt-12 text-center"><button onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })} data-cursor-hover className="btn-brand rounded-full px-9 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#18141a] shadow-lg transition-all hover:shadow-xl">Plan Your Custom Event</button></div>
       </div>
     </section>
-  );
-}
-
-function ServicePanel({ service, index }: { service: typeof services[0]; index: number }) {
-  const [ref, visible] = useReveal<HTMLDivElement>();
-  const Icon = service.icon;
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal-scale ${visible ? 'visible' : ''} group relative overflow-hidden rounded-2xl cursor-pointer min-h-full`}
-      style={{
-        transitionDelay: `${(index % 4) * 80}ms`,
-        boxShadow: '0 4px 24px rgba(247,168,196,0.15)',
-      }}
-      data-cursor-hover
-    >
-      {/* Background image */}
-      <img
-        src={service.img}
-        alt={service.title}
-        className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
-      />
-
-      {/* Light-to-transparent overlay — keeps it from going dark */}
-      <div className="absolute inset-0 transition-opacity duration-500"
-        style={{ background: 'linear-gradient(to top, rgba(24,20,26,0.78) 0%, rgba(24,20,26,0.25) 50%, rgba(24,20,26,0.05) 100%)' }} />
-
-      {/* Brand colour wash on hover — warm tint instead of black */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: `linear-gradient(to top, ${service.accent}55 0%, transparent 55%)` }}
-      />
-
-      {/* Index number — top right */}
-      <div className="absolute top-4 right-4 font-display text-2xl font-light leading-none"
-        style={{ color: `${service.accent}60` }}>
-        {String(index + 1).padStart(2, '0')}
-      </div>
-
-      {/* Icon badge — slides in on hover */}
-      <div
-        className="absolute top-5 left-5 w-10 h-10 rounded-full flex items-center justify-center shadow-lg
-                   opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-500"
-        style={{ background: `linear-gradient(135deg, ${service.accent}, #ffd97d)` }}
-      >
-        <Icon size={18} className="text-white" />
-      </div>
-
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        <h3 className="font-display text-lg md:text-xl text-white font-normal leading-tight">
-          {service.title}
-        </h3>
-
-        <div className="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500">
-          <div
-            className="h-[2px] w-8 my-3 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-75 rounded-full"
-            style={{ background: `linear-gradient(90deg, ${service.accent}, #ffd97d)` }}
-          />
-          <p className="text-white/80 text-[13px] leading-relaxed">{service.desc}</p>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="mt-3 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-80"
-            style={{ color: service.accent }}
-          >
-            Enquire →
-          </button>
-        </div>
-      </div>
-
-      {/* Bottom grow line */}
-      <div
-        className="absolute bottom-0 left-0 h-[3px] w-0 group-hover:w-full transition-all duration-700 rounded-full"
-        style={{ background: `linear-gradient(90deg, ${service.accent}, #ffd97d)` }}
-      />
-    </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState, useRef } from 'react';
 import { ChevronDown, Heart, Briefcase, Sparkles } from 'lucide-react';
 import Particles from './Particles';
@@ -34,7 +36,7 @@ export default function Hero() {
 
   // Slide auto-advance
   useEffect(() => {
-    const t = setInterval(() => setActive((p) => (p + 1) % slides.length), 5500);
+    const t = setInterval(() => setActive((p) => (p + 1) % slides.length), 5000);
     return () => clearInterval(t);
   }, []);
 

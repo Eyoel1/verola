@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, FormEvent } from 'react';
 import { Phone, Mail, MessageCircle, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import { useReveal } from '../hooks/useReveal';
@@ -24,7 +26,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28 bg-[#fdf9f5] overflow-hidden">
+    <section id="contact" className="relative py-28 bg-[#fdf9f5] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
       <div className="orb orb-2 w-[500px] h-[500px] bottom-[-150px] right-[-100px]" style={{ background: 'radial-gradient(circle, #fde8f1, #fff6dc, transparent)', opacity: 0.3 }} />
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -32,10 +34,10 @@ export default function Contact() {
         {/* Heading */}
         <div ref={headingRef} className={`text-center mb-16 reveal ${headingVisible ? 'visible' : ''}`}>
           <span className="text-[#e8739b] text-xs tracking-[0.4em] uppercase font-medium">Get in Touch</span>
-          <h2 className="font-display text-4xl md:text-5xl mt-4 text-[#18141a] font-light">
+          <h2 className="font-display text-4xl md:text-5xl mt-4 font-light">
             Let's Plan Your <em className="text-shimmer-dark not-italic">Event</em>
           </h2>
-          <p className="text-[#5a4a58] mt-5 max-w-2xl mx-auto font-light text-[15px]">
+          <p className="text-[#5a4a58] dark:text-white/70 mt-5 max-w-2xl mx-auto font-light text-[15px]">
             Ready to create something extraordinary? Reach out and let's start building the infrastructure
             for your success.
           </p>
@@ -48,7 +50,7 @@ export default function Contact() {
 
           {/* Contact info */}
           <div ref={infoRef} className={`reveal-left ${infoVisible ? 'visible' : ''} space-y-4`}>
-            {contactInfo.map((info, i) => {
+            {contactInfo.map((info) => {
               const Icon = info.icon;
               return (
                 <a
@@ -56,8 +58,7 @@ export default function Contact() {
                   href={info.href}
                   target={info.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  data-cursor-hover
-                  className="group flex items-start gap-5 bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden"
+                  className="group flex items-start gap-5 bg-white dark:bg-[#251d28] border border-[#f7a8c4]/20 dark:border-white/10 rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden"
                 >
                   {/* Hover gradient sweep */}
                   <div
@@ -75,7 +76,7 @@ export default function Contact() {
                   </div>
                   <div className="relative">
                     <div className="text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: info.color }}>{info.label}</div>
-                    <div className="text-[#18141a] mt-1 text-[15px] group-hover:text-[#e8739b] transition-colors">{info.value}</div>
+                    <div className="text-[#18141a] dark:text-white mt-1 text-[15px] group-hover:text-[#e8739b] transition-colors">{info.value}</div>
                   </div>
                 </a>
               );
@@ -86,8 +87,7 @@ export default function Contact() {
               href="https://maps.app.goo.gl/qTf5YvNYG334Jjge9"
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor-hover
-              className="block rounded-2xl overflow-hidden shadow-md mt-4 group relative h-48"
+              className="block rounded-2xl overflow-hidden shadow-md mt-4 group relative h-48 border border-[#f7a8c4]/20 dark:border-white/10"
               style={{ background: 'linear-gradient(135deg, #18141a, #2d2030)' }}
             >
               {/* Animated grid pattern */}
@@ -110,26 +110,13 @@ export default function Contact() {
                 <p className="text-shimmer text-xs mt-2 tracking-wide uppercase font-medium">View on Google Maps →</p>
               </div>
             </a>
-
-            {/* Social */}
-            <div className="flex gap-3 pt-2">
-              {['Instagram', 'Facebook', 'TikTok', 'LinkedIn'].map((s) => (
-                <button
-                  key={s}
-                  data-cursor-hover
-                  className="px-5 py-2 rounded-full border border-[#f7a8c4]/30 text-[#e8739b] text-xs tracking-wide hover:bg-gradient-to-r hover:from-[#f7a8c4] hover:to-[#ffd97d] hover:text-white hover:border-transparent transition-all duration-400"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
           </div>
 
           {/* Form */}
           <div ref={formRef} className={`reveal-right ${formVisible ? 'visible' : ''}`}>
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-2xl shadow-2xl p-8 space-y-5 relative overflow-hidden"
+              className="bg-white dark:bg-[#251d28] border border-[#f7a8c4]/20 dark:border-white/10 rounded-2xl shadow-2xl p-8 space-y-5 relative overflow-hidden"
             >
               {/* Animated top bar */}
               <div className="absolute top-0 left-0 right-0 h-1 gradient-line" />
@@ -144,29 +131,28 @@ export default function Contact() {
               <div className="grid sm:grid-cols-2 gap-5 relative">
                 <Field label="Phone" name="phone" type="tel" placeholder="+251 ..." />
                 <div>
-                  <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] block mb-2">Event Type</label>
+                  <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] dark:text-white/70 block mb-2">Event Type</label>
                   <select
-                    className="w-full bg-[#fdf9f5] border border-[#f7a8c4]/25 rounded-lg px-4 py-3 text-[15px] text-[#18141a] focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all"
+                    className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/25 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all"
                   >
                     {eventTypes.map((t) => (
-                      <option key={t} value={t}>{t}</option>
+                      <option key={t} value={t} className="bg-white dark:bg-[#18141a] text-[#18141a] dark:text-white">{t}</option>
                     ))}
                   </select>
                 </div>
               </div>
               <div className="relative">
-                <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] block mb-2">Tell us about your event</label>
+                <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] dark:text-white/70 block mb-2">Tell us about your event</label>
                 <textarea
                   rows={4}
                   placeholder="Date, location, number of guests, and any details you'd like to share..."
-                  className="w-full bg-[#fdf9f5] border border-[#f7a8c4]/25 rounded-lg px-4 py-3 text-[15px] text-[#18141a] focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all resize-none placeholder:text-[#5a4a58]/40"
+                  className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/25 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all resize-none placeholder:text-[#5a4a58]/40 dark:placeholder:text-white/40"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={sent}
-                data-cursor-hover
                 className={`w-full py-4 rounded-full text-sm tracking-[0.15em] uppercase font-semibold flex items-center justify-center gap-2 transition-all duration-500 ${
                   sent
                     ? 'bg-green-500 text-white'
@@ -194,13 +180,13 @@ export default function Contact() {
 function Field({ label, name, type, placeholder }: { label: string; name: string; type: string; placeholder: string }) {
   return (
     <div>
-      <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] block mb-2">{label}</label>
+      <label className="text-xs tracking-[0.15em] uppercase text-[#5a4a58] dark:text-white/70 block mb-2">{label}</label>
       <input
         type={type}
         name={name}
         placeholder={placeholder}
         required
-        className="w-full bg-[#fdf9f5] border border-[#f7a8c4]/25 rounded-lg px-4 py-3 text-[15px] text-[#18141a] focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all placeholder:text-[#5a4a58]/40"
+        className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/25 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all placeholder:text-[#5a4a58]/40 dark:placeholder:text-white/40"
       />
     </div>
   );

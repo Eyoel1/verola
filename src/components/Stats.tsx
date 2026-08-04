@@ -1,11 +1,13 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useReveal } from '../hooks/useReveal';
 
 const stats = [
-  { num: 2026, suffix: '', label: 'Year Established', sub: 'Founded with vision' },
-  { num: 3, suffix: '', label: 'Visionary Partners', sub: 'Leading with passion' },
-  { num: 10, suffix: '+', label: 'Services Offered', sub: 'Full-service production' },
-  { num: 100, suffix: '%', label: 'Dedication', sub: 'To every detail' },
+  { from: 1990, num: 2026, suffix: '', label: 'Year Established', sub: 'Founded with vision' },
+  { from: 0,    num: 3,    suffix: '+', label: 'Visionary Partners', sub: 'Leading with passion' },
+  { from: 0,    num: 10,   suffix: '+', label: 'Services Offered', sub: 'Full-service production' },
+  { from: 0,    num: 100,  suffix: '%', label: 'Dedication', sub: 'To every detail' },
 ];
 
 export default function Stats() {
@@ -13,15 +15,10 @@ export default function Stats() {
 
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* Animated gradient background */}
       <div
         className="absolute inset-0 animate-gradient"
-        style={{
-          background: 'linear-gradient(135deg, #f7a8c4, #fbc8da, #ffd97d, #ffe8a3, #f7a8c4)',
-          backgroundSize: '300% 300%',
-        }}
+        style={{ background: 'linear-gradient(135deg, #f7a8c4, #fbc8da, #ffd97d, #ffe8a3, #f7a8c4)', backgroundSize: '300% 300%' }}
       />
-      {/* Top/bottom wave dividers */}
       <div className="absolute top-0 left-0 right-0 h-2 bg-white/20 blur-sm" />
       <div className="absolute bottom-0 left-0 right-0 h-2 bg-white/20 blur-sm" />
 
@@ -33,7 +30,6 @@ export default function Stats() {
               className={`text-center ${visible ? 'animate-scale-in' : 'opacity-0'}`}
               style={{ animationDelay: `${i * 160}ms`, animationFillMode: 'both' }}
             >
-              {/* Pulse circle behind number */}
               <div className="relative inline-block">
                 <div
                   className="absolute inset-0 rounded-full bg-white/25"
@@ -45,7 +41,7 @@ export default function Stats() {
                   }}
                 />
                 <div className="stat-number text-5xl md:text-6xl text-white font-light relative z-10">
-                  <CountUp target={stat.num} suffix={stat.suffix} start={visible} delay={i * 160} />
+                  <CountUp from={stat.from} target={stat.num} suffix={stat.suffix} start={visible} delay={i * 160} />
                 </div>
               </div>
               <div className="text-white/90 text-xs tracking-[0.25em] uppercase mt-2">{stat.label}</div>
@@ -58,25 +54,28 @@ export default function Stats() {
   );
 }
 
-function CountUp({ target, suffix, start, delay }: { target: number; suffix: string; start: boolean; delay: number }) {
-  const [current, setCurrent] = useState(0);
+function CountUp({ from, target, suffix, start, delay }: { from: number; target: number; suffix: string; start: boolean; delay: number }) {
+  const [current, setCurrent] = useState(from);
 
   useEffect(() => {
     if (!start) return;
     let frame: number;
     const wait = setTimeout(() => {
-      const duration = 2200;
+      const duration = target >= 2000 ? 1800 : 1400; // faster for small numbers
       const startTime = performance.now();
       const animate = (now: number) => {
         const progress = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setCurrent(Math.round(eased * target));
+        // fast-start easing: rushes in quickly then decelerates
+        const eased = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        setCurrent(Math.round(from + eased * (target - from)));
         if (progress < 1) frame = requestAnimationFrame(animate);
       };
       frame = requestAnimationFrame(animate);
     }, delay);
     return () => { clearTimeout(wait); cancelAnimationFrame(frame); };
-  }, [start, target, delay]);
+  }, [start, from, target, delay]);
 
   return <>{current}{suffix}</>;
 }

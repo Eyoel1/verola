@@ -1,193 +1,135 @@
-import { Sparkles, Gem, Target, Wand2 } from 'lucide-react';
+'use client';
+
+import { Sparkles, Gem, Target, Wand2, Award, ArrowUpRight } from 'lucide-react';
 import { useReveal } from '../hooks/useReveal';
 
 const values = [
-  { icon: Gem,      title: 'Luxury',     desc: 'Premium experiences in every detail' },
-  { icon: Target,   title: 'Precision',  desc: 'Flawless execution, every time' },
-  { icon: Wand2,    title: 'Creativity', desc: 'Unique concepts that captivate' },
-  { icon: Sparkles, title: 'Quality',    desc: 'Uncompromising standards throughout' },
+  { icon: Gem,      title: 'Luxury',       desc: 'Premium aesthetics and experiences in every detail.',    accent: '#f7a8c4', tag: 'Standard' },
+  { icon: Target,   title: 'Precision',    desc: 'Flawless execution and coordination, every single time.', accent: '#ffd97d', tag: 'Execution' },
+  { icon: Wand2,    title: 'Creativity',   desc: 'Bespoke concepts, custom decor, and spatial artistry.',  accent: '#e8739b', tag: 'Design' },
+  { icon: Sparkles, title: 'Quality',      desc: 'World-class vendors and state-of-the-art production.',   accent: '#f5c535', tag: 'Production' },
 ];
 
 const pillars = [
-  { num: '2026', label: 'Founded', detail: 'Born from a passion for extraordinary events' },
-  { num: 'AAU',  label: 'Based in Addis', detail: 'Serving clients across Ethiopia and beyond' },
-  { num: '3',    label: 'Visionaries', detail: 'A team united by creativity and excellence' },
+  { num: '2026', label: 'Founded' },
+  { num: '3+',   label: 'Visionaries' },
+  { num: '100%', label: 'Dedicated' },
 ];
 
 export default function About() {
-  const [topRef,  topVisible]  = useReveal<HTMLDivElement>();
-  const [midRef,  midVisible]  = useReveal<HTMLDivElement>();
-  const [valRef,  valVisible]  = useReveal<HTMLDivElement>();
+  const [topRef, topVisible] = useReveal<HTMLDivElement>();
+  const [valRef, valVisible] = useReveal<HTMLDivElement>();
 
   return (
-    <section id="about" className="relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #fff6f9 0%, #fffdf7 50%, #fff6f9 100%)' }}>
+    <section id="about" className="relative py-24 bg-[#fdf9f5] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#f7a8c4]/10 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#ffd97d]/15 blur-3xl pointer-events-none" />
 
-      {/* ── decorative blobs ── */}
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #f7a8c422 0%, transparent 70%)', transform: 'translate(-30%, -30%)' }} />
-      <div className="absolute bottom-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #ffd97d1a 0%, transparent 70%)', transform: 'translate(30%, 30%)' }} />
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
 
-      {/* ── large faded display word ── */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <span className="font-display text-[18vw] font-light leading-none tracking-tight"
-          style={{ color: '#f7a8c4', opacity: 0.06 }}>
-          Velora
-        </span>
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-6 py-28 md:py-36">
-
-        {/* ── top: label + headline ── */}
-        <div ref={topRef} className={`reveal ${topVisible ? 'visible' : ''} text-center mb-20`}>
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#f7a8c4]" />
-            <span className="text-[#e8739b] text-[10px] tracking-[0.5em] uppercase font-medium">Our Story</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#f7a8c4]" />
-          </div>
-
-          <h2 className="font-display text-5xl md:text-7xl lg:text-[88px] text-[#18141a] font-light leading-[1.0] mb-8">
-            Events that
-            <br />
-            <em className="not-italic" style={{
-              background: 'linear-gradient(100deg, #e8739b 0%, #f7a8c4 35%, #ffd97d 65%, #f5c535 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>move people.</em>
-          </h2>
-
-          {/* Gradient rule */}
-          <div className="mx-auto h-[2px] w-24 rounded-full mb-10"
-            style={{ background: 'linear-gradient(90deg, #f7a8c4, #ffd97d)' }} />
-
-          <p className="text-[#5a4a58] text-[17px] leading-[1.9] font-light max-w-2xl mx-auto">
-            Velora Event &amp; Communication is a premier full-service event management and
-            production firm. We bridge the gap between creative vision and flawless execution —
-            turning every milestone into an unforgettable memory.
-          </p>
-        </div>
-
-        {/* ── middle: three pillars ── */}
-        <div ref={midRef} className={`reveal ${midVisible ? 'visible' : ''} grid grid-cols-1 md:grid-cols-3 gap-0 mb-20 border border-[#f7a8c4]/20 rounded-3xl overflow-hidden`}>
-          {pillars.map((p, i) => (
-            <div
-              key={p.label}
-              className={`group relative px-10 py-12 text-center transition-all duration-500 hover:bg-white/70
-                ${i < pillars.length - 1 ? 'md:border-r border-b md:border-b-0 border-[#f7a8c4]/20' : ''}`}
-            >
-              {/* Hover gradient wash */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-none"
-                style={{ background: 'linear-gradient(160deg, #fde8f150, #fff6dc50)' }} />
-
-              <div className="relative">
-                <div className="font-display text-6xl md:text-7xl font-light leading-none mb-3"
-                  style={{
-                    background: 'linear-gradient(135deg, #e8739b, #ffd97d)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}>
-                  {p.num}
-                </div>
-                <div className="text-[10px] tracking-[0.4em] uppercase text-[#e8739b] font-medium mb-3">
-                  {p.label}
-                </div>
-                <p className="text-[#5a4a58] text-[13px] leading-relaxed font-light">
-                  {p.detail}
-                </p>
+        {/* ─── Top: Label + Headline + Quote ─── */}
+        <div
+          ref={topRef}
+          className={`transition-all duration-1000 ${topVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+            {/* Left: headline */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fde8f1] dark:bg-white/10 border border-[#f7a8c4]/30 text-[10px] font-bold uppercase tracking-widest text-[#e8739b] mb-5">
+                <Sparkles className="w-3 h-3" />
+                <span>Our Story</span>
+              </div>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-[60px] font-light leading-[1.05] mb-6">
+                Events that<br />
+                <span className="italic text-shimmer-dark">move people.</span>
+              </h2>
+              {/* Stat pills */}
+              <div className="flex items-center gap-4 flex-wrap mt-8">
+                {pillars.map((p) => (
+                  <div key={p.label} className="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-white/5 border border-[#f7a8c4]/20 rounded-full">
+                    <span className="font-display text-lg font-light text-shimmer-dark leading-none">{p.num}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-[#5a4a58] dark:text-white/60 font-semibold">{p.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+
+            {/* Right: description + award badge */}
+            <div className="flex flex-col gap-6">
+              <p className="text-[#5a4a58] dark:text-white/70 text-base font-light leading-relaxed">
+                Velora Event & Communication is a premier full-service event management
+                firm. We bridge creative vision with flawless execution — turning every
+                milestone into an unforgettable memory.
+              </p>
+              {/* Quote callout */}
+              <div className="relative p-6 rounded-2xl border border-[#f7a8c4]/25 bg-white dark:bg-white/5">
+                <div className="absolute -top-3 left-5">
+                  <span className="font-display text-4xl leading-none text-[#f7a8c4]">"</span>
+                </div>
+                <p className="font-display text-lg font-light italic leading-snug">
+                  We don't just plan events — we build the stage for your greatest moments.
+                </p>
+                <div className="flex items-center gap-2 mt-3 text-[10px] uppercase tracking-widest text-[#e8739b] font-bold">
+                  <Award className="w-3.5 h-3.5" />
+                  <span>The Velora Commitment</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* ── bottom: quote + values ── */}
-        <div ref={valRef} className={`reveal ${valVisible ? 'visible' : ''}`}>
-
-          {/* Pull quote */}
-          <div className="text-center mb-16">
-            <p className="font-display text-2xl md:text-3xl text-[#18141a] font-light italic leading-[1.5] max-w-3xl mx-auto">
-              "We don't just plan events — we build the stage for your greatest moments."
-            </p>
+        {/* ─── Values Grid ─── */}
+        <div
+          ref={valRef}
+          className={`transition-all duration-1000 delay-200 ${valVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="flex items-center gap-4 mb-10">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#f7a8c4]/30" />
+            <span className="text-[10px] uppercase tracking-widest text-[#5a4a58] dark:text-white/60 font-semibold whitespace-nowrap">Core Values</span>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#f7a8c4]/30" />
           </div>
 
-          {/* Values — horizontal interactive list */}
-          <div className="max-w-4xl mx-auto">
-            {values.map((v, i) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {values.map((v) => {
               const Icon = v.icon;
               return (
                 <div
                   key={v.title}
-                  className="group relative flex items-center gap-6 py-7 px-4 md:px-8 transition-all duration-500 hover:px-8 md:hover:px-10 overflow-hidden"
-                  data-cursor-hover
+                  className="group relative bg-white dark:bg-[#251d28] border border-[#f7a8c4]/20 rounded-2xl p-5 hover:border-[#f7a8c4]/50 hover:shadow-lg hover:shadow-pink-100/30 transition-all duration-400 hover:-translate-y-1 overflow-hidden"
                 >
-                  {/* Hover background sweep */}
+                  {/* Colored top-bar */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: 'linear-gradient(90deg, #fde8f160 0%, #fff6dc40 60%, transparent 100%)' }}
+                    className="absolute top-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-t-2xl"
+                    style={{ background: `linear-gradient(90deg, ${v.accent}, #ffd97d)` }}
                   />
 
-                  {/* Large faded number */}
-                  <div
-                    className="font-display text-5xl md:text-6xl font-light leading-none w-16 text-right shrink-0 transition-all duration-500 group-hover:scale-110"
-                    style={{
-                      color: '#f7a8c4',
-                      opacity: 0.3,
-                    }}
-                  >
-                    0{i + 1}
-                  </div>
-
-                  {/* Icon in a ring */}
-                  <div
-                    className="relative shrink-0 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110"
-                    style={{
-                      border: '1.5px solid #f7a8c440',
-                      background: 'linear-gradient(135deg, #fde8f140, #fff6dc40)',
-                    }}
-                  >
-                    <Icon
-                      size={22}
-                      className="text-[#e8739b] transition-all duration-500 group-hover:text-[#e8739b]"
-                    />
-                    {/* Ring pulse on hover */}
-                    <div
-                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 pointer-events-none"
-                      style={{ border: '1.5px solid #f7a8c4', }}
+                  {/* Tag + Arrow */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[9px] uppercase tracking-widest font-bold"
+                      style={{ color: v.accent }}>
+                      {v.tag}
+                    </span>
+                    <ArrowUpRight
+                      className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ color: v.accent }}
                     />
                   </div>
 
-                  {/* Title + desc */}
-                  <div className="relative flex-1">
-                    <h4 className="font-display text-2xl md:text-3xl text-[#18141a] font-light leading-none mb-1 transition-all duration-300"
-                      style={{
-                        background: 'linear-gradient(100deg, #18141a, #18141a)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                      }}
-                    >
-                      <span className="group-hover:text-shimmer-dark transition-all duration-500">{v.title}</span>
-                    </h4>
-                    <p className="text-[#5a4a58] text-[13px] leading-relaxed font-light max-w-sm">
-                      {v.desc}
-                    </p>
-                  </div>
-
-                  {/* Arrow that slides in */}
+                  {/* Icon */}
                   <div
-                    className="relative shrink-0 w-10 h-10 rounded-full flex items-center justify-center opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500"
-                    style={{ background: 'linear-gradient(135deg, #f7a8c4, #ffd97d)' }}
+                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{ background: `${v.accent}18` }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+                    <Icon className="w-5 h-5" style={{ color: v.accent }} />
                   </div>
 
-                  {/* Bottom divider */}
-                  {i < values.length - 1 && (
-                    <div className="absolute bottom-0 left-4 right-4 md:left-8 md:right-8 h-px" style={{ background: 'linear-gradient(90deg, transparent, #f7a8c430, transparent)' }} />
-                  )}
+                  <h4 className="font-display text-lg font-normal mb-1.5 group-hover:text-[#e8739b] transition-colors duration-300">
+                    {v.title}
+                  </h4>
+                  <p className="text-[#5a4a58] dark:text-white/60 text-xs font-light leading-relaxed">
+                    {v.desc}
+                  </p>
                 </div>
               );
             })}

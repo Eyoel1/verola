@@ -1,3 +1,5 @@
+'use client';
+
 import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
 
 export default function Footer() {
@@ -5,10 +7,8 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#18141a] text-white/70 overflow-hidden">
-      {/* Top gradient bar */}
       <div className="h-1.5 gradient-line" />
 
-      {/* Ambient orbs */}
       <div className="orb orb-1 w-[400px] h-[400px] top-[-100px] left-[-80px]" style={{ background: 'radial-gradient(circle, #f7a8c420, transparent)', opacity: 0.4 }} />
       <div className="orb orb-2 w-[300px] h-[300px] bottom-[-80px] right-[-60px]" style={{ background: 'radial-gradient(circle, #ffd97d18, transparent)', opacity: 0.35 }} />
 
@@ -20,17 +20,13 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img src="/Velora_1.png" alt="Velora" className="h-14 animate-glow rounded-full" />
               <div>
-                <div className="font-display text-2xl text-white leading-none">
-                  Velora<span className="text-shimmer">.</span>
-                </div>
-                <div className="text-[8px] tracking-[0.35em] uppercase text-[#f7a8c4] mt-1">Events & Communications</div>
+                <div className="font-display text-2xl text-white leading-none">Velora<span className="text-shimmer">.</span></div>
+                <div className="text-[8px] tracking-[0.35em] uppercase text-[#f7a8c4] mt-1">Events &amp; Communications</div>
               </div>
             </div>
             <p className="text-sm leading-relaxed font-light max-w-xs">
-              We don't just plan events — we build the infrastructure for your success. Premier event
-              management &amp; production in Addis Ababa, Ethiopia.
+              We don't just plan events — we build the infrastructure for your success. Premier event management &amp; production in Addis Ababa, Ethiopia.
             </p>
-            {/* Animated line */}
             <div className="h-0.5 w-20 gradient-line mt-5 origin-left" />
           </div>
 
@@ -42,7 +38,7 @@ export default function Footer() {
                 { label: 'Home', href: '#home' },
                 { label: 'About Us', href: '#about' },
                 { label: 'Services', href: '#services' },
-                { label: 'Gallery', href: '#gallery' },
+                { label: 'How It Works', href: '#how-it-works' },
                 { label: 'Contact', href: '#contact' },
               ].map((link) => (
                 <li key={link.href}>
@@ -82,7 +78,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
+        {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-white/40">
             © {year} Velora Event &amp; Communication. All rights reserved.
