@@ -86,8 +86,8 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ── Gradient overlay ── */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/25 to-black/75 z-10" />
+      {/* ── High-Contrast Gradient overlay ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black/85 z-10" />
 
       {/* ── Animated brand orbs ── */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
@@ -103,24 +103,19 @@ export default function Hero() {
 
       {/* ── Floating geometric shapes ── */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        {/* Rotating ring top-right */}
         <div
           className="absolute top-20 right-20 w-40 h-40 rounded-full border border-white/10 animate-rotate-slow"
           style={{ borderImage: 'linear-gradient(135deg, #f7a8c440, #ffd97d40) 1' }}
         />
         <div className="absolute top-20 right-20 w-28 h-28 rounded-full border border-[#f7a8c4]/20 animate-rotate-rev" style={{ margin: '24px' }} />
-
-        {/* Diamond bottom-left */}
         <div
           className="absolute bottom-40 left-16 w-8 h-8 bg-[#f7a8c4]/20 animate-float-b"
           style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', animationDelay: '1s' }}
         />
-        {/* Triangle mid-right */}
         <div
           className="absolute top-1/2 right-32 w-6 h-6 bg-[#ffd97d]/25 animate-float"
           style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', animationDelay: '2s' }}
         />
-        {/* Circle mid-left */}
         <div className="absolute top-1/3 left-24 w-5 h-5 rounded-full bg-[#fbc8da]/30 animate-float-b" style={{ animationDelay: '0.5s' }} />
       </div>
 
@@ -134,22 +129,22 @@ export default function Hero() {
 
         {/* Category badge */}
         <div className="animate-fade-up-delay1 mb-6 sm:mb-7">
-          <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 sm:px-6 py-2.5">
+          <div className="inline-flex items-center gap-2 sm:gap-3 bg-black/40 backdrop-blur-md border border-white/30 rounded-full px-4 sm:px-6 py-2.5 shadow-lg">
             <ActiveIcon size={15} className="text-[#ffd97d]" />
-            <span className="text-white/80 text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.35em] uppercase">
+            <span className="text-white font-medium text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.35em] uppercase">
               {slides[active].label}
             </span>
             <div className="w-2 h-2 rounded-full bg-[#f7a8c4] animate-pulse" />
           </div>
         </div>
 
-        {/* Headline */}
-        <h1 className="font-display text-[clamp(3rem,14vw,4.25rem)] sm:text-6xl md:text-7xl lg:text-[90px] text-white font-light animate-fade-up-delay2 leading-[1.05]">
+        {/* Headline with drop shadow for maximum readability */}
+        <h1 className="font-display text-[clamp(3rem,14vw,4.25rem)] sm:text-6xl md:text-7xl lg:text-[90px] text-white font-normal animate-fade-up-delay2 leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
           Where Vision
           <br />
           Becomes{' '}
           <span
-            className="text-shimmer inline-block transition-all duration-500"
+            className="text-shimmer inline-block transition-all duration-500 font-medium"
             style={{
               opacity: wordVisible ? 1 : 0,
               transform: wordVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -160,7 +155,7 @@ export default function Hero() {
         </h1>
 
         {/* Subtext */}
-        <p className="text-white/65 text-sm sm:text-base md:text-lg mt-6 sm:mt-8 max-w-2xl font-light animate-fade-up-delay3 leading-relaxed">
+        <p className="text-white/90 text-sm sm:text-base md:text-lg mt-6 sm:mt-8 max-w-2xl font-light animate-fade-up-delay3 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
           We don't just plan events — we build the infrastructure for your success.
           <br />
           Premier event management &amp; production in Addis Ababa, Ethiopia.
@@ -176,7 +171,7 @@ export default function Hero() {
           </button>
           <button
             onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-outline-brand w-full sm:w-auto px-7 sm:px-9 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-medium"
+            className="btn-outline-brand w-full sm:w-auto px-7 sm:px-9 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-medium bg-black/30 backdrop-blur-sm"
           >
             <span className="relative z-10">Plan Your Event</span>
           </button>
@@ -191,7 +186,7 @@ export default function Hero() {
               className={`h-[3px] rounded-full transition-all duration-600 ${
                 i === active
                   ? 'w-10 bg-gradient-to-r from-[#f7a8c4] to-[#ffd97d]'
-                  : 'w-3 bg-white/30 hover:bg-white/60'
+                  : 'w-3 bg-white/40 hover:bg-white/70'
               }`}
             />
           ))}
