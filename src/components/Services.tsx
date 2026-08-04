@@ -33,16 +33,42 @@ export default function Services() {
     <section id="services" className="relative overflow-hidden bg-[#fdf9f5] py-24 text-[#18141a] transition-colors duration-500 dark:bg-[#18141a] dark:text-white">
       <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-[#f7a8c4]/15 blur-3xl" />
       <div className="pointer-events-none absolute -right-32 bottom-4 h-96 w-96 rounded-full bg-[#ffd97d]/15 blur-3xl" />
+
       <div className="relative z-10 mx-auto max-w-7xl px-6">
+        
+        {/* Header */}
         <div ref={headingRef} className={`mb-12 flex flex-col justify-between gap-7 md:mb-14 md:flex-row md:items-end ${headingVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'} transition-all duration-1000`}>
           <div className="max-w-3xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#f7a8c4]/40 bg-[#fde8f1] px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#e8739b] dark:bg-white/10"><Sparkles className="h-3.5 w-3.5" /> What We Offer</div>
-            <h2 className="font-display text-4xl font-light leading-tight sm:text-5xl md:text-6xl">Our signature <span className="italic text-shimmer-dark">services.</span></h2>
-            <p className="mt-4 max-w-xl text-sm font-light leading-relaxed text-[#5a4a58] dark:text-white/70">Choose a service to explore it, or let the collection play. Every detail is managed by one thoughtful team.</p>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#f7a8c4]/40 bg-[#fde8f1] px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#e8739b] dark:bg-white/10">
+              <Sparkles className="h-3.5 w-3.5" /> What We Offer
+            </div>
+            <h2 className="font-display text-3xl font-light leading-tight sm:text-4xl md:text-5xl text-[#18141a] dark:text-white">
+              Our Signature <span className="italic text-shimmer-dark">Services</span>
+            </h2>
           </div>
-          <div className="flex items-center gap-4 self-start md:self-auto"><span className="text-xs font-semibold tracking-widest text-[#9b7b8e] dark:text-white/60">{String(activeIndex + 1).padStart(2, '0')} <span className="mx-1 text-[#d7bdca]">/</span> {String(services.length).padStart(2, '0')}</span><button onClick={() => { setPaused(true); goTo(activeIndex - 1); }} className="grid h-11 w-11 place-items-center rounded-full border border-[#f7a8c4]/40 bg-white transition hover:bg-[#fde8f1] dark:bg-white/10"><ChevronLeft className="h-4 w-4" /></button><button onClick={() => { setPaused(true); goTo(activeIndex + 1); }} className="grid h-11 w-11 place-items-center rounded-full bg-[#e8739b] text-white transition hover:bg-[#d95e8b]"><ChevronRight className="h-4 w-4" /></button></div>
+
+          <div className="flex items-center gap-4 self-start md:self-auto">
+            <span className="text-xs font-semibold tracking-widest text-[#9b7b8e] dark:text-white/60">
+              {String(activeIndex + 1).padStart(2, '0')} <span className="mx-1 text-[#d7bdca]">/</span> {String(services.length).padStart(2, '0')}
+            </span>
+            <button
+              onClick={() => { setPaused(true); goTo(activeIndex - 1); }}
+              className="grid h-11 w-11 place-items-center rounded-full border border-[#f7a8c4]/40 bg-white transition hover:bg-[#fde8f1] dark:bg-white/10 text-[#18141a] dark:text-white"
+              aria-label="Previous service"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => { setPaused(true); goTo(activeIndex + 1); }}
+              className="grid h-11 w-11 place-items-center rounded-full bg-[#e8739b] text-white transition hover:bg-[#d95e8b]"
+              aria-label="Next service"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
+        {/* Card deck */}
         <div className="relative py-4" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
           <div className="flex min-h-[470px] items-stretch justify-center gap-4 sm:gap-6">
             {services.map((service, index) => {
@@ -51,17 +77,99 @@ export default function Services() {
               const previous = index === (activeIndex - 1 + services.length) % services.length;
               const next = index === (activeIndex + 1) % services.length;
               const visible = selected || previous || next;
-              return <article key={service.title} onClick={() => { setPaused(true); setActiveIndex(index); }} className={`relative shrink-0 cursor-pointer overflow-hidden rounded-[2rem] border transition-all duration-700 ${selected ? 'w-[min(82vw,540px)] border-[#f7a8c4]/60 bg-[#251d28] shadow-2xl shadow-pink-500/20' : visible ? 'hidden w-[230px] border-[#5a4a58]/45 bg-[#251d28] opacity-100 hover:border-[#f7a8c4]/70 md:block' : 'hidden'}`}>
-                <img src={service.img} alt={service.title} className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ${selected ? 'scale-105' : 'scale-100'}`} />
-                <div className={`absolute inset-0 transition-all duration-500 ${selected ? 'bg-gradient-to-t from-[#18141a] via-[#18141a]/35 to-transparent' : 'bg-gradient-to-t from-[#18141a]/85 via-[#18141a]/30 to-[#18141a]/10'}`} />
-                <div className="absolute left-5 right-5 top-5 flex items-start justify-between"><span className={`rounded-full px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest ${selected ? 'bg-white/90 text-[#e8739b]' : 'bg-black/25 text-white/85 backdrop-blur'}`}>{service.tag}</span><span className="font-display text-3xl text-white/75">{String(index + 1).padStart(2, '0')}</span></div>
-                <div className="absolute inset-x-5 bottom-6 sm:inset-x-7 sm:bottom-8"><div className={`mb-4 grid h-11 w-11 place-items-center rounded-full transition-all ${selected ? 'bg-[#f7a8c4] text-[#18141a]' : 'bg-white/15 text-white backdrop-blur'}`}><Icon className="h-4 w-4" /></div><h3 className={`font-display leading-none text-white transition-all ${selected ? 'text-3xl sm:text-4xl' : 'text-2xl'}`}>{service.title}</h3><div className={`overflow-hidden transition-all duration-500 ${selected ? 'mt-3 max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}><p className="text-sm font-light leading-relaxed text-white/80">{service.desc}</p><button onClick={(event) => { event.stopPropagation(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="mt-5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-[#f7a8c4] hover:text-white">Enquire now <ArrowRight className="h-4 w-4" /></button></div></div>
-              </article>;
+              return (
+                <article
+                  key={service.title}
+                  onClick={() => { setPaused(true); setActiveIndex(index); }}
+                  className={`relative shrink-0 cursor-pointer overflow-hidden rounded-[2rem] border transition-all duration-700 ${
+                    selected
+                      ? 'w-[min(82vw,540px)] border-[#f7a8c4]/60 bg-[#251d28] shadow-2xl shadow-pink-500/20'
+                      : visible
+                      ? 'hidden w-[230px] border-[#5a4a58]/45 bg-[#251d28] opacity-100 hover:border-[#f7a8c4]/70 md:block'
+                      : 'hidden'
+                  }`}
+                >
+                  <img
+                    src={service.img}
+                    alt={service.title}
+                    className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ${selected ? 'scale-105' : 'scale-100'}`}
+                  />
+                  {/* High contrast dark gradient overlay over image */}
+                  <div
+                    className={`absolute inset-0 transition-all duration-500 ${
+                      selected
+                        ? 'bg-gradient-to-t from-[#18141a] via-[#18141a]/60 to-black/30'
+                        : 'bg-gradient-to-t from-[#18141a]/95 via-[#18141a]/50 to-[#18141a]/20'
+                    }`}
+                  />
+
+                  {/* Top tag & index */}
+                  <div className="absolute left-5 right-5 top-5 flex items-start justify-between">
+                    <span className={`rounded-full px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest ${
+                      selected ? 'bg-white/95 text-[#e8739b] shadow-md' : 'bg-black/40 text-white/90 backdrop-blur'
+                    }`}>
+                      {service.tag}
+                    </span>
+                    <span className="font-display text-3xl text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Content with high contrast drop shadow */}
+                  <div className="absolute inset-x-5 bottom-6 sm:inset-x-7 sm:bottom-8">
+                    <div className={`mb-4 grid h-11 w-11 place-items-center rounded-full transition-all ${
+                      selected ? 'bg-[#f7a8c4] text-[#18141a] shadow-lg' : 'bg-white/20 text-white backdrop-blur'
+                    }`}>
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <h3 className={`font-display leading-none text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] transition-all ${
+                      selected ? 'text-2xl sm:text-3xl font-normal text-[#f7a8c4]' : 'text-xl font-normal'
+                    }`}>
+                      {service.title}
+                    </h3>
+                    <div className={`overflow-hidden transition-all duration-500 ${selected ? 'mt-3 max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <p className="text-sm font-light leading-relaxed text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.85)]">
+                        {service.desc}
+                      </p>
+                      <button
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="mt-5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-[#f7a8c4] hover:text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
+                      >
+                        Enquire now <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
             })}
           </div>
         </div>
-        <div className="mt-7 flex justify-center gap-2">{services.map((service, index) => <button key={service.title} onClick={() => { setPaused(true); setActiveIndex(index); }} aria-label={`Show ${service.title}`} className={`h-2 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-[#e8739b]' : 'w-2 bg-[#f7a8c4]/50 hover:bg-[#f7a8c4]'}`} />)}</div>
-        <div className="mt-12 text-center"><button onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })} data-cursor-hover className="btn-brand rounded-full px-9 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#18141a] shadow-lg transition-all hover:shadow-xl">Plan Your Custom Event</button></div>
+
+        {/* Indicators */}
+        <div className="mt-7 flex justify-center gap-2">
+          {services.map((service, index) => (
+            <button
+              key={service.title}
+              onClick={() => { setPaused(true); setActiveIndex(index); }}
+              aria-label={`Show ${service.title}`}
+              className={`h-2 rounded-full transition-all ${index === activeIndex ? 'w-8 bg-[#e8739b]' : 'w-2 bg-[#f7a8c4]/50 hover:bg-[#f7a8c4]'}`}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            data-cursor-hover
+            className="btn-brand rounded-full px-9 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#18141a] shadow-lg transition-all hover:shadow-xl"
+          >
+            Plan Your Custom Event
+          </button>
+        </div>
       </div>
     </section>
   );
