@@ -14,7 +14,7 @@
   --yellow-light: #ffe8a3;
   --yellow-pale:  #fff6dc;
   --yellow-deep:  #f5c535;
-  --cream:        #fdf9f5;
+  --cream:        #f8eee0;
   --charcoal:     #18141a;
   --charcoal2:    #2d2030;
   --slate:        #5a4a58;
@@ -27,8 +27,8 @@
 
 body {
   font-family: 'Jost', sans-serif;
-  background: var(--cream);
-  color: var(--charcoal);
+  background: #f8eee0;
+  color: #18141a;
   overflow-x: hidden;
   transition: background 0.4s ease, color 0.4s ease;
 }
@@ -289,10 +289,10 @@ html.dark .glass-card-dark {
 
 /* ── Glass cards ── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 248, 242, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(247, 168, 196, 0.25);
+  border: 1px solid rgba(247, 168, 196, 0.35);
 }
 .glass-card-dark {
   background: rgba(30, 18, 34, 0.6);
@@ -406,7 +406,7 @@ html.dark .glass-card-dark {
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-track { background: #f8eee0; }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(var(--pink), var(--yellow));
   border-radius: 4px;

@@ -42,9 +42,9 @@ export default function HowItWorks() {
   const [ref, visible] = useReveal<HTMLDivElement>();
 
   return (
-    <section id="how-it-works" className="relative py-24 bg-[#fdf9f5] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
+    <section id="how-it-works" className="relative py-24 bg-[#f8eee0] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
       {/* Subtle orb */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#f7a8c4]/10 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#f7a8c4]/15 blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
@@ -79,7 +79,7 @@ export default function HowItWorks() {
               return (
                 <div
                   key={s.step}
-                  className="group relative bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 rounded-2xl p-6 hover:border-[#f7a8c4]/70 hover:shadow-xl hover:shadow-pink-100/40 transition-all duration-500 hover:-translate-y-1.5 shadow-sm"
+                  className="group relative bg-[#fff7ee] dark:bg-[#251d28] border border-[#f7a8c4]/30 rounded-2xl p-6 hover:border-[#f7a8c4]/70 hover:shadow-xl hover:shadow-pink-900/10 transition-all duration-500 hover:-translate-y-1.5 shadow-sm"
                   style={{ transitionDelay: `${i * 60}ms` }}
                 >
                   {/* Step number + icon row */}

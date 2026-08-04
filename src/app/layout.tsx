@@ -25,7 +25,7 @@ export default function RootLayout({
         <link rel="icon" href="/Velora_1.png" type="image/png" sizes="any" />
         <link rel="apple-touch-icon" href="/Velora_1.png" />
       </head>
-      <body className="antialiased min-h-screen bg-[#fdf9f5] overflow-x-hidden">
+      <body className="antialiased min-h-screen bg-[#f8eee0] overflow-x-hidden">
         {children}
       </body>
     </html>

@@ -30,7 +30,7 @@ export default function Services() {
   }, [activeIndex, paused]);
 
   return (
-    <section id="services" className="relative overflow-hidden bg-[#fdf9f5] py-24 text-[#18141a] transition-colors duration-500 dark:bg-[#18141a] dark:text-white">
+    <section id="services" className="relative overflow-hidden bg-[#f4e6d4] py-24 text-[#18141a] transition-colors duration-500 dark:bg-[#18141a] dark:text-white">
       <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-[#f7a8c4]/15 blur-3xl" />
       <div className="pointer-events-none absolute -right-32 bottom-4 h-96 w-96 rounded-full bg-[#ffd97d]/15 blur-3xl" />
 

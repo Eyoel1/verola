@@ -26,7 +26,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28 bg-[#fdf9f5] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
+    <section id="contact" className="relative py-28 bg-[#f4e6d4] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
       <div className="orb orb-2 w-[500px] h-[500px] bottom-[-150px] right-[-100px]" style={{ background: 'radial-gradient(circle, #fde8f1, #fff6dc, transparent)', opacity: 0.3 }} />
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -59,7 +59,7 @@ export default function Contact() {
                   href={info.href}
                   target={info.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-5 bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 dark:border-white/10 rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden"
+                  className="group flex items-start gap-5 bg-[#fff7ee] dark:bg-[#251d28] border border-[#f7a8c4]/30 dark:border-white/10 rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden"
                 >
                   {/* Hover gradient sweep */}
                   <div
@@ -114,7 +114,7 @@ export default function Contact() {
           <div ref={formRef} className={`reveal-right ${formVisible ? 'visible' : ''}`}>
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 dark:border-white/10 rounded-2xl shadow-2xl p-8 space-y-5 relative overflow-hidden"
+              className="bg-[#fff7ee] dark:bg-[#251d28] border border-[#f7a8c4]/30 dark:border-white/10 rounded-2xl shadow-2xl p-8 space-y-5 relative overflow-hidden"
             >
               {/* Animated top bar */}
               <div className="absolute top-0 left-0 right-0 h-1 gradient-line" />
@@ -131,10 +131,10 @@ export default function Contact() {
                 <div>
                   <label className="text-xs tracking-[0.15em] uppercase text-[#18141a] dark:text-white/90 font-bold block mb-2">Event Type</label>
                   <select
-                    className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all"
+                    className="w-full bg-[#f8eee0] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all"
                   >
                     {eventTypes.map((t) => (
-                      <option key={t} value={t} className="bg-white dark:bg-[#18141a] text-[#18141a] dark:text-white font-medium">{t}</option>
+                      <option key={t} value={t} className="bg-[#fff7ee] dark:bg-[#18141a] text-[#18141a] dark:text-white font-medium">{t}</option>
                     ))}
                   </select>
                 </div>
@@ -144,7 +144,7 @@ export default function Contact() {
                 <textarea
                   rows={4}
                   placeholder="Date, location, number of guests, and any details you'd like to share..."
-                  className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all resize-none placeholder:text-[#2d2030]/60 dark:placeholder:text-white/50"
+                  className="w-full bg-[#f8eee0] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all resize-none placeholder:text-[#2d2030]/60 dark:placeholder:text-white/50"
                 />
               </div>
 
@@ -184,7 +184,7 @@ function Field({ label, name, type, placeholder }: { label: string; name: string
         name={name}
         placeholder={placeholder}
         required
-        className="w-full bg-[#fdf9f5] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all placeholder:text-[#2d2030]/60 dark:placeholder:text-white/50"
+        className="w-full bg-[#f8eee0] dark:bg-[#18141a] border border-[#f7a8c4]/40 dark:border-white/15 rounded-lg px-4 py-3 text-[15px] text-[#18141a] dark:text-white font-medium focus:border-[#e8739b] focus:ring-2 focus:ring-[#f7a8c4]/20 focus:outline-none transition-all placeholder:text-[#2d2030]/60 dark:placeholder:text-white/50"
       />
     </div>
   );

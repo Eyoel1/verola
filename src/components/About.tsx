@@ -21,10 +21,10 @@ export default function About() {
   const [valRef, valVisible] = useReveal<HTMLDivElement>();
 
   return (
-    <section id="about" className="relative py-24 bg-[#fdf9f5] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
+    <section id="about" className="relative py-24 bg-[#f8eee0] dark:bg-[#18141a] text-[#18141a] dark:text-white transition-colors duration-500 overflow-hidden">
       {/* Decorative blobs */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#f7a8c4]/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#ffd97d]/15 blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#f7a8c4]/15 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#ffd97d]/20 blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
@@ -47,7 +47,7 @@ export default function About() {
               {/* Stat pills */}
               <div className="flex items-center gap-4 flex-wrap mt-8">
                 {pillars.map((p) => (
-                  <div key={p.label} className="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-white/5 border border-[#f7a8c4]/30 rounded-full shadow-sm">
+                  <div key={p.label} className="flex items-center gap-3 px-4 py-2.5 bg-[#fff7ee] dark:bg-white/5 border border-[#f7a8c4]/30 rounded-full shadow-sm">
                     <span className="font-display text-lg font-normal text-shimmer-dark leading-none">{p.num}</span>
                     <span className="text-[10px] uppercase tracking-widest text-[#18141a] dark:text-white/90 font-bold">{p.label}</span>
                   </div>
@@ -63,7 +63,7 @@ export default function About() {
                 milestone into an unforgettable memory.
               </p>
               {/* Quote callout */}
-              <div className="relative p-6 rounded-2xl border border-[#f7a8c4]/30 bg-white dark:bg-white/5 shadow-sm">
+              <div className="relative p-6 rounded-2xl border border-[#f7a8c4]/30 bg-[#fff7ee] dark:bg-white/5 shadow-sm">
                 <div className="absolute -top-3 left-5">
                   <span className="font-display text-4xl leading-none text-[#e8739b]">"</span>
                 </div>
@@ -96,7 +96,7 @@ export default function About() {
               return (
                 <div
                   key={v.title}
-                  className="group relative bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 rounded-2xl p-6 hover:border-[#f7a8c4]/70 hover:shadow-lg hover:shadow-pink-100/40 transition-all duration-400 hover:-translate-y-1 overflow-hidden"
+                  className="group relative bg-[#fff7ee] dark:bg-[#251d28] border border-[#f7a8c4]/30 rounded-2xl p-6 hover:border-[#f7a8c4]/70 hover:shadow-lg hover:shadow-pink-900/10 transition-all duration-400 hover:-translate-y-1 overflow-hidden"
                 >
                   {/* Colored top-bar */}
                   <div
