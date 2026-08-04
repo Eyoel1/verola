@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { ChevronDown, Heart, Briefcase, Sparkles } from 'lucide-react';
+import { Heart, Briefcase, Sparkles } from 'lucide-react';
 import Particles from './Particles';
 
 const slides = [
@@ -63,7 +63,7 @@ export default function Hero() {
   const ActiveIcon = slides[active].icon;
 
   return (
-    <section id="home" ref={sectionRef} className="relative h-screen min-h-[680px] overflow-hidden">
+    <section id="home" ref={sectionRef} className="relative h-[100svh] min-h-[620px] overflow-hidden sm:h-screen sm:min-h-[680px]">
 
       {/* ── Background slides ── */}
       <div ref={parallaxRef} className="absolute inset-0 scale-110">
@@ -133,10 +133,10 @@ export default function Hero() {
       <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6">
 
         {/* Category badge */}
-        <div className="animate-fade-up-delay1 mb-7">
-          <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-2.5">
+        <div className="animate-fade-up-delay1 mb-6 sm:mb-7">
+          <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 sm:px-6 py-2.5">
             <ActiveIcon size={15} className="text-[#ffd97d]" />
-            <span className="text-white/80 text-xs tracking-[0.35em] uppercase">
+            <span className="text-white/80 text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.35em] uppercase">
               {slides[active].label}
             </span>
             <div className="w-2 h-2 rounded-full bg-[#f7a8c4] animate-pulse" />
@@ -144,7 +144,7 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[90px] text-white font-light animate-fade-up-delay2 leading-[1.05]">
+        <h1 className="font-display text-[clamp(3rem,14vw,4.25rem)] sm:text-6xl md:text-7xl lg:text-[90px] text-white font-light animate-fade-up-delay2 leading-[1.05]">
           Where Vision
           <br />
           Becomes{' '}
@@ -160,25 +160,23 @@ export default function Hero() {
         </h1>
 
         {/* Subtext */}
-        <p className="text-white/65 text-base md:text-lg mt-8 max-w-2xl font-light animate-fade-up-delay3 leading-relaxed">
+        <p className="text-white/65 text-sm sm:text-base md:text-lg mt-6 sm:mt-8 max-w-2xl font-light animate-fade-up-delay3 leading-relaxed">
           We don't just plan events — we build the infrastructure for your success.
           <br />
           Premier event management &amp; production in Addis Ababa, Ethiopia.
         </p>
 
         {/* CTAs */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-fade-up-delay4">
+        <div className="mt-8 sm:mt-10 flex w-full max-w-sm flex-col sm:max-w-none sm:w-auto sm:flex-row gap-3 sm:gap-4 animate-fade-up-delay4">
           <button
             onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
-            data-cursor-hover
-            className="btn-brand text-[#18141a] px-9 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-semibold shadow-xl"
+            className="btn-brand w-full sm:w-auto text-[#18141a] px-7 sm:px-9 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-semibold shadow-xl"
           >
             Explore Services
           </button>
           <button
             onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            data-cursor-hover
-            className="btn-outline-brand px-9 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-medium"
+            className="btn-outline-brand w-full sm:w-auto px-7 sm:px-9 py-4 rounded-full text-sm tracking-[0.15em] uppercase font-medium"
           >
             <span className="relative z-10">Plan Your Event</span>
           </button>
@@ -197,17 +195,6 @@ export default function Hero() {
               }`}
             />
           ))}
-        </div>
-
-        {/* Scroll bounce */}
-        <div className="scroll-indicator">
-          <div className="w-8 h-12 rounded-full border border-white/30 flex items-start justify-center pt-2 mx-auto">
-            <div
-              className="w-1.5 h-3 rounded-full bg-gradient-to-b from-[#f7a8c4] to-[#ffd97d]"
-              style={{ animation: 'scrollBounce 2s ease-in-out infinite' }}
-            />
-          </div>
-          <ChevronDown className="text-white/40 mt-1 mx-auto" size={20} />
         </div>
       </div>
     </section>
