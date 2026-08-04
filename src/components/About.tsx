@@ -111,37 +111,83 @@ export default function About() {
             </p>
           </div>
 
-          {/* Values */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Values — horizontal interactive list */}
+          <div className="max-w-4xl mx-auto">
             {values.map((v, i) => {
               const Icon = v.icon;
               return (
                 <div
                   key={v.title}
-                  className="group relative rounded-2xl p-7 text-center overflow-hidden transition-all duration-500 hover:-translate-y-1"
-                  style={{
-                    background: 'white',
-                    boxShadow: '0 2px 20px rgba(247,168,196,0.10)',
-                    transitionDelay: `${i * 70}ms`,
-                  }}
+                  className="group relative flex items-center gap-6 py-7 px-4 md:px-8 transition-all duration-500 hover:px-8 md:hover:px-10 overflow-hidden"
                   data-cursor-hover
                 >
-                  {/* Gradient fill on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                    style={{ background: 'linear-gradient(145deg, #fde8f1, #fff6dc)' }} />
+                  {/* Hover background sweep */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: 'linear-gradient(90deg, #fde8f160 0%, #fff6dc40 60%, transparent 100%)' }}
+                  />
 
-                  {/* Left accent bar */}
-                  <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-r-full scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500"
-                    style={{ background: 'linear-gradient(180deg, #f7a8c4, #ffd97d)' }} />
-
-                  <div className="relative">
-                    <div className="inline-flex w-12 h-12 rounded-full items-center justify-center mb-4 transition-transform duration-400 group-hover:scale-110"
-                      style={{ background: 'linear-gradient(135deg, #fde8f1, #fff6dc)' }}>
-                      <Icon size={20} className="text-[#e8739b]" />
-                    </div>
-                    <h4 className="font-display text-xl text-[#18141a] font-light mb-1">{v.title}</h4>
-                    <p className="text-[#5a4a58] text-[12px] leading-relaxed">{v.desc}</p>
+                  {/* Large faded number */}
+                  <div
+                    className="font-display text-5xl md:text-6xl font-light leading-none w-16 text-right shrink-0 transition-all duration-500 group-hover:scale-110"
+                    style={{
+                      color: '#f7a8c4',
+                      opacity: 0.3,
+                    }}
+                  >
+                    0{i + 1}
                   </div>
+
+                  {/* Icon in a ring */}
+                  <div
+                    className="relative shrink-0 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110"
+                    style={{
+                      border: '1.5px solid #f7a8c440',
+                      background: 'linear-gradient(135deg, #fde8f140, #fff6dc40)',
+                    }}
+                  >
+                    <Icon
+                      size={22}
+                      className="text-[#e8739b] transition-all duration-500 group-hover:text-[#e8739b]"
+                    />
+                    {/* Ring pulse on hover */}
+                    <div
+                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 pointer-events-none"
+                      style={{ border: '1.5px solid #f7a8c4', }}
+                    />
+                  </div>
+
+                  {/* Title + desc */}
+                  <div className="relative flex-1">
+                    <h4 className="font-display text-2xl md:text-3xl text-[#18141a] font-light leading-none mb-1 transition-all duration-300"
+                      style={{
+                        background: 'linear-gradient(100deg, #18141a, #18141a)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      <span className="group-hover:text-shimmer-dark transition-all duration-500">{v.title}</span>
+                    </h4>
+                    <p className="text-[#5a4a58] text-[13px] leading-relaxed font-light max-w-sm">
+                      {v.desc}
+                    </p>
+                  </div>
+
+                  {/* Arrow that slides in */}
+                  <div
+                    className="relative shrink-0 w-10 h-10 rounded-full flex items-center justify-center opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500"
+                    style={{ background: 'linear-gradient(135deg, #f7a8c4, #ffd97d)' }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
+
+                  {/* Bottom divider */}
+                  {i < values.length - 1 && (
+                    <div className="absolute bottom-0 left-4 right-4 md:left-8 md:right-8 h-px" style={{ background: 'linear-gradient(90deg, transparent, #f7a8c430, transparent)' }} />
+                  )}
                 </div>
               );
             })}
