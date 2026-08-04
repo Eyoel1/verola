@@ -14,16 +14,15 @@ export default function Stats() {
   const [ref, visible] = useReveal<HTMLDivElement>();
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative overflow-hidden py-16 sm:py-20 bg-[#18141a] dark:bg-[#120d15] text-white border-y border-[#f7a8c4]/20 shadow-inner">
+      {/* Ambient background glows */}
       <div
-        className="absolute inset-0 animate-gradient"
-        style={{ background: 'linear-gradient(135deg, #f7a8c4, #fbc8da, #ffd97d, #ffe8a3, #f7a8c4)', backgroundSize: '300% 300%' }}
+        className="absolute inset-0 opacity-40 pointer-events-none"
+        style={{ background: 'radial-gradient(circle at 30% 50%, #f7a8c425 0%, transparent 60%), radial-gradient(circle at 70% 50%, #ffd97d20 0%, transparent 60%)' }}
       />
-      <div className="absolute top-0 left-0 right-0 h-2 bg-white/20 blur-sm" />
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-white/20 blur-sm" />
 
-      <div ref={ref} className="relative max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
+      <div ref={ref} className="relative max-w-7xl mx-auto px-6 z-10">
+        <div className="grid grid-cols-2 gap-y-10 gap-x-6 lg:grid-cols-4 lg:gap-10">
           {stats.map((stat, i) => (
             <div
               key={stat.label}
@@ -32,20 +31,27 @@ export default function Stats() {
             >
               <div className="relative inline-block">
                 <div
-                  className="absolute inset-0 rounded-full bg-white/25"
+                  className="absolute inset-0 rounded-full bg-[#f7a8c4]/20"
                   style={{
-                    width: '80px', height: '80px',
+                    width: '85px', height: '85px',
                     top: '50%', left: '50%',
                     transform: 'translate(-50%,-50%)',
                     animation: visible ? `pulse-ring 2.8s ease infinite ${i * 400}ms` : 'none',
                   }}
                 />
-                <div className="stat-number text-5xl md:text-6xl text-white font-light relative z-10">
+                {/* Bold, bright gold counter text with drop shadow */}
+                <div className="stat-number relative z-10 text-4xl sm:text-5xl md:text-6xl font-light text-[#ffd97d] drop-shadow-[0_4px_16px_rgba(255,217,125,0.4)]">
                   <CountUp from={stat.from} target={stat.num} suffix={stat.suffix} start={visible} delay={i * 160} />
                 </div>
               </div>
-              <div className="text-white/90 text-xs tracking-[0.25em] uppercase mt-2">{stat.label}</div>
-              <div className="text-white/60 text-xs mt-1 font-light">{stat.sub}</div>
+              {/* Ultra-clear bold label */}
+              <div className="mt-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] sm:text-xs sm:tracking-[0.25em]">
+                {stat.label}
+              </div>
+              {/* Crisp high contrast subtext */}
+              <div className="mt-1 text-xs font-medium text-[#f7a8c4]">
+                {stat.sub}
+              </div>
             </div>
           ))}
         </div>
@@ -61,11 +67,10 @@ function CountUp({ from, target, suffix, start, delay }: { from: number; target:
     if (!start) return;
     let frame: number;
     const wait = setTimeout(() => {
-      const duration = target >= 2000 ? 1800 : 1400; // faster for small numbers
+      const duration = target >= 2000 ? 1800 : 1400;
       const startTime = performance.now();
       const animate = (now: number) => {
         const progress = Math.min((now - startTime) / duration, 1);
-        // fast-start easing: rushes in quickly then decelerates
         const eased = progress < 0.5
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2;

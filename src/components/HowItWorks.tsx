@@ -9,7 +9,7 @@ const steps = [
     icon: MessageSquare,
     title: 'Consultation',
     desc: 'Deep-dive session to capture your story, style, and vision.',
-    color: '#f7a8c4',
+    color: '#e8739b',
     bg: '#fde8f1',
   },
   {
@@ -51,14 +51,14 @@ export default function HowItWorks() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fde8f1] dark:bg-white/10 border border-[#f7a8c4]/40 text-[10px] font-bold uppercase tracking-widest text-[#e8739b] mb-4">
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3.5 h-3.5" />
               <span>Our Process</span>
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl font-light leading-tight">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light leading-tight text-[#18141a] dark:text-white">
               How It <span className="italic text-shimmer-dark">Works</span>
             </h2>
           </div>
-          <p className="text-[#5a4a58] dark:text-white/70 text-sm font-light leading-relaxed max-w-xs md:text-right">
+          <p className="text-[#18141a] dark:text-white/80 text-sm font-normal leading-relaxed max-w-xs md:text-right">
             Four seamless steps from first conversation to unforgettable celebration.
           </p>
         </div>
@@ -70,7 +70,7 @@ export default function HowItWorks() {
         >
           {/* Connector line (desktop only) */}
           <div className="hidden md:block relative mb-0">
-            <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#f7a8c4]/40 to-transparent" style={{ top: '32px' }} />
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#f7a8c4]/50 to-transparent" style={{ top: '32px' }} />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -79,16 +79,17 @@ export default function HowItWorks() {
               return (
                 <div
                   key={s.step}
-                  className="group relative bg-white dark:bg-[#251d28] border border-[#f7a8c4]/20 rounded-2xl p-6 hover:border-[#f7a8c4]/60 hover:shadow-xl hover:shadow-pink-100/30 transition-all duration-500 hover:-translate-y-1.5"
+                  className="group relative bg-white dark:bg-[#251d28] border border-[#f7a8c4]/30 rounded-2xl p-6 hover:border-[#f7a8c4]/70 hover:shadow-xl hover:shadow-pink-100/40 transition-all duration-500 hover:-translate-y-1.5 shadow-sm"
                   style={{ transitionDelay: `${i * 60}ms` }}
                 >
                   {/* Step number + icon row */}
                   <div className="flex items-center justify-between mb-5">
-                    <span className="font-display text-4xl font-light text-[#f7a8c4]/40 leading-none group-hover:text-[#e8739b]/60 transition-colors duration-300">
+                    {/* Bold, high contrast step number */}
+                    <span className="font-display text-4xl font-normal text-[#e8739b] leading-none group-hover:scale-110 transition-transform duration-300">
                       {s.step}
                     </span>
                     <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-sm"
                       style={{ background: s.bg }}
                     >
                       <Icon className="w-5 h-5" style={{ color: s.color }} />
@@ -96,10 +97,11 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="font-display text-xl font-normal mb-2 group-hover:text-[#e8739b] transition-colors duration-300">
+                  <h3 className="font-display text-xl font-normal mb-2 text-[#18141a] dark:text-white group-hover:text-[#e8739b] transition-colors duration-300">
                     {s.title}
                   </h3>
-                  <p className="text-[#5a4a58] dark:text-white/60 text-xs leading-relaxed font-light">
+                  {/* Dark crisp description text */}
+                  <p className="text-[#2d2030] dark:text-white/90 text-xs leading-relaxed font-normal">
                     {s.desc}
                   </p>
 
