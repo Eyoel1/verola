@@ -6,21 +6,21 @@ import Particles from './Particles';
 
 const slides = [
   {
-    img: 'https://images.pexels.com/photos/37828118/pexels-photo-37828118.jpeg?auto=compress&cs=tinysrgb&h=900&w=1600',
-    label: 'Weddings',
+    img: '/velora_gg_5858.jpg',
+    label: 'Weddings & Celebrations',
     icon: Heart,
     accent: '#f7a8c4',
   },
   {
-    img: 'https://images.pexels.com/photos/9275222/pexels-photo-9275222.jpeg?auto=compress&cs=tinysrgb&h=900&w=1600',
-    label: 'Corporate Events',
-    icon: Briefcase,
+    img: '/velora_gg_5886.jpg',
+    label: 'Grand Event Production',
+    icon: Sparkles,
     accent: '#ffd97d',
   },
   {
-    img: 'https://images.pexels.com/photos/16935999/pexels-photo-16935999.jpeg?auto=compress&cs=tinysrgb&h=900&w=1600',
-    label: 'Luxury Decor',
-    icon: Sparkles,
+    img: '/velora_gg_5962.jpg',
+    label: 'Luxury Venue Styling',
+    icon: Briefcase,
     accent: '#fbc8da',
   },
 ];
