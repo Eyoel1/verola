@@ -265,7 +265,7 @@ html.dark .glass-card-dark {
 }
 
 .text-shimmer-dark {
-  background: linear-gradient(90deg, var(--pink-deep), var(--yellow-deep), var(--pink), var(--yellow-light), var(--pink-deep));
+  background: linear-gradient(90deg, #7e1b43, #a82e5c, #7e1b43, #98224f);
   background-size: 300% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
