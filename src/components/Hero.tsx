@@ -1,21 +1,27 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, Briefcase, Sparkles } from 'lucide-react';
 import Particles from './Particles';
 
 const slides = [
   {
-    img: '/velora_gg_5858.jpg',
-    label: 'Weddings & Celebrations',
+    img: '/custom_hero_wedding.jpg',
+    label: 'Weddings',
     icon: Heart,
     accent: '#f7a8c4',
   },
   {
-    img: '/velora_gg_5886.jpg',
-    label: 'What We Do & Event Production',
-    icon: Sparkles,
+    img: 'https://images.pexels.com/photos/9275222/pexels-photo-9275222.jpeg?auto=compress&cs=tinysrgb&h=900&w=1600',
+    label: 'Corporate Events',
+    icon: Briefcase,
     accent: '#ffd97d',
+  },
+  {
+    img: 'https://images.pexels.com/photos/16935999/pexels-photo-16935999.jpeg?auto=compress&cs=tinysrgb&h=900&w=1600',
+    label: 'Luxury Decor',
+    icon: Sparkles,
+    accent: '#fbc8da',
   },
 ];
 
