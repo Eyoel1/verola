@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { Heart, Briefcase, Sparkles } from 'lucide-react';
+import { Heart, Sparkles } from 'lucide-react';
 import Particles from './Particles';
 
 const slides = [
@@ -13,15 +13,9 @@ const slides = [
   },
   {
     img: '/velora_gg_5886.jpg',
-    label: 'Grand Event Production',
+    label: 'What We Do & Event Production',
     icon: Sparkles,
     accent: '#ffd97d',
-  },
-  {
-    img: '/velora_gg_5962.jpg',
-    label: 'Luxury Venue Styling',
-    icon: Briefcase,
-    accent: '#fbc8da',
   },
 ];
 
