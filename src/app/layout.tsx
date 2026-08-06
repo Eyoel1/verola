@@ -34,9 +34,12 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: '/Velora_1.png',
-    shortcut: '/Velora_1.png',
-    apple: '/Velora_1.png',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   verification: {
     google: '7RDO7o93RjKu5j3uxUSv3txEfdd67unO8VtWok',
@@ -48,6 +51,7 @@ const jsonLd = {
   '@type': 'LocalBusiness',
   name: 'Velora Event & Communication',
   image: 'https://www.veloraevents.et/custom_hero_wedding.jpg',
+  logo: 'https://www.veloraevents.et/icon-512.png',
   '@id': 'https://www.veloraevents.et',
   url: 'https://www.veloraevents.et',
   telephone: '+251956535210',
@@ -88,8 +92,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/Velora_1.png" type="image/png" sizes="any" />
-        <link rel="apple-touch-icon" href="/Velora_1.png" />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
