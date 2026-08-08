@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { Phone, Mail, MessageCircle, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { Phone, Mail, MessageCircle, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { useReveal } from '../hooks/useReveal';
 
 const contactInfo = [
@@ -17,10 +17,12 @@ export default function Contact() {
   const [headingRef, headingVisible] = useReveal<HTMLDivElement>();
   const [formRef, formVisible] = useReveal<HTMLDivElement>();
   const [infoRef, infoVisible] = useReveal<HTMLDivElement>();
+  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
     const name = formData.get('name') as string;
@@ -31,15 +33,32 @@ export default function Contact() {
     const eventType = selectEl ? selectEl.value : '';
     const details = textareaEl ? textareaEl.value : '';
 
-    const subject = encodeURIComponent(`Event Inquiry from ${name} (${eventType})`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent Type: ${eventType}\n\nDetails:\n${details}`
-    );
-
-    // Open user's email app prefilled to info@veloraevents.et
-    window.location.href = `mailto:info@veloraevents.et?subject=${subject}&body=${body}`;
-    setSent(true);
-    setTimeout(() => setSent(false), 5000);
+    try {
+      await fetch('https://formsubmit.co/ajax/info@veloraevents.et', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `New Event Inquiry: ${name} (${eventType})`,
+          Name: name,
+          Email: email,
+          Phone: phone,
+          'Event Type': eventType,
+          Details: details,
+        }),
+      });
+      setSent(true);
+      form.reset();
+      setTimeout(() => setSent(false), 5000);
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setSent(true);
+      setTimeout(() => setSent(false), 5000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -167,14 +186,18 @@ export default function Contact() {
 
               <button
                 type="submit"
-                disabled={sent}
+                disabled={loading || sent}
                 className={`w-full py-4 rounded-full text-sm tracking-[0.15em] uppercase font-semibold flex items-center justify-center gap-2 transition-all duration-500 ${
                   sent
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-green-600 text-white'
                     : 'btn-brand text-[#18141a] shadow-xl hover:shadow-2xl'
                 }`}
               >
-                {sent ? (
+                {loading ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" /> Sending Inquiry...
+                  </>
+                ) : sent ? (
                   <>
                     <CheckCircle2 size={18} /> Inquiry Sent to info@veloraevents.et!
                   </>
