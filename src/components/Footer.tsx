@@ -68,7 +68,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3 group">
                 <Mail className="text-[#fbc8da] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={16} />
-                <a href="mailto:Samrawit.endale@Velora.com" className="text-white/90 hover:text-[#fbc8da] transition-colors break-all" data-cursor-hover>Samrawit.endale@Velora.com</a>
+                <a href="mailto:info@veloraevents.et" className="text-white/90 hover:text-[#fbc8da] transition-colors break-all" data-cursor-hover>info@veloraevents.et</a>
               </li>
               <li className="flex items-start gap-3 group">
                 <MapPin className="text-[#ffe8a3] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={16} />

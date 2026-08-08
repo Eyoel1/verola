@@ -7,7 +7,7 @@ import { useReveal } from '../hooks/useReveal';
 const contactInfo = [
   { icon: Phone, label: 'Phone', value: '+251 956 535 210', href: 'tel:+251956535210', color: '#e8739b' },
   { icon: MessageCircle, label: 'WhatsApp', value: '+251 911 715 064', href: 'https://wa.me/251911715064', color: '#e8739b' },
-  { icon: Mail, label: 'Email', value: 'Samrawit.endale@Velora.com', href: 'mailto:Samrawit.endale@Velora.com', color: '#e8739b' },
+  { icon: Mail, label: 'Email', value: 'info@veloraevents.et', href: 'mailto:info@veloraevents.et', color: '#e8739b' },
   { icon: MapPin, label: 'Office', value: '22 next to Zerihun building, IPS building 2nd floor, Addis Ababa', href: 'https://maps.app.goo.gl/qTf5YvNYG334Jjge9', color: '#e8739b' },
 ];
 
@@ -19,8 +19,25 @@ export default function Contact() {
   const [infoRef, infoVisible] = useReveal<HTMLDivElement>();
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
+    const selectEl = form.querySelector('select');
+    const textareaEl = form.querySelector('textarea');
+    const eventType = selectEl ? selectEl.value : '';
+    const details = textareaEl ? textareaEl.value : '';
+
+    const subject = encodeURIComponent(`Event Inquiry from ${name} (${eventType})`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent Type: ${eventType}\n\nDetails:\n${details}`
+    );
+
+    // Open user's email app prefilled to info@veloraevents.et
+    window.location.href = `mailto:info@veloraevents.et?subject=${subject}&body=${body}`;
     setSent(true);
     setTimeout(() => setSent(false), 5000);
   };
@@ -159,7 +176,7 @@ export default function Contact() {
               >
                 {sent ? (
                   <>
-                    <CheckCircle2 size={18} /> Message Sent!
+                    <CheckCircle2 size={18} /> Inquiry Sent to info@veloraevents.et!
                   </>
                 ) : (
                   <>
